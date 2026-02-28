@@ -19,7 +19,8 @@ const usuarioSchema = new mongoose.Schema({
     correo: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        trim: true
     },
 
     contrasenna: {
@@ -27,10 +28,13 @@ const usuarioSchema = new mongoose.Schema({
         required: true
     },
 
-    token: {
+    token: {    
         type: String,
         required: false
     }
-});
+
+}, 
+
+{ timestamps: true });
 
 module.exports = mongoose.model('Usuario', usuarioSchema);

@@ -29,6 +29,8 @@ const vehiculoSchema = new mongoose.Schema({
         default: 'disponible'
     }
 
-});
+},
+
+{ timestamps: true });
 
 module.exports = mongoose.model('Vehiculo', vehiculoSchema);
