@@ -65,8 +65,10 @@ const generarToken = async (req, res) => {
 };
 
 const verificarToken = async (req, res, next) => {
+    // Obtener el token del encabezado de autorización
     const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1]; // Assuming Bearer token format
+    // El token se espera en el formato "Bearer <token>"
+    const token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
         return res.status(401).json({ message: "Token no proporcionado." });
@@ -77,7 +79,9 @@ const verificarToken = async (req, res, next) => {
         if (!usuarioEncontrado) {
             return res.status(401).json({ message: "Token inválido." });
         }
+        // El token es válido, se puede acceder al usuario encontrado
         req.usuario = usuarioEncontrado;
+        
         // Continuar con la siguiente función de middleware o ruta
         next();
     } catch (error) {
