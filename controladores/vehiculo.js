@@ -7,7 +7,7 @@ const crearVehiculo = async (req, res) => {
             modelo: req.body.modelo,
             anno: req.body.anno,
             precio: req.body.precio,
-            usuario: req.body.usuarioId
+            usuario: req.usuario._id
         });
 
         // Guardar el vehículo en la BD y retornar el vehículo creado
