@@ -27,7 +27,10 @@ const vehiculoSchema = new mongoose.Schema({
         type: String,
         enum: ['disponible', 'vendido'],
         default: 'disponible'
-    }
+    },
+
+    // Cada vehículo tiene un usuario (dueño)
+    usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true }
 
 },
 
