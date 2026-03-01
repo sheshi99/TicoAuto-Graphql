@@ -19,6 +19,7 @@ database.once('connected', () => {
 //Creación del servidor
 const app = express();
 
+
 //middleswares
 app.use(bodyParser.json());
 app.use(cors({
@@ -26,6 +27,8 @@ app.use(cors({
     methods: ['GET', 'POST', 'DELETE', 'PUT'],
 }));
 
+//Ruta para acceder a las imágenes
+app.use('/imagenes', express.static('imagenes'));
 
 //Rutas
 app.use('/api', require('./rutas/vehiculos'));
