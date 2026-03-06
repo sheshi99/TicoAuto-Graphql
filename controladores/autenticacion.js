@@ -1,5 +1,8 @@
 const usuario = require('../modelos/usuario');
-const bcrypt = require('bcrypt');
+const jwt = requiere('jsonwebtoken');
+const bcrypt = requiere('bcrypt');
+
+const SECRET_KEY = process.env.JWT_SECRET;
 
 
 const validarContrasenna = (contrasenna) => {
@@ -40,8 +43,7 @@ const registrarUsuario = async (req, res) => {
             primerApellido,
             segundoApellido,
             correo,
-            contrasenna: hashedContrasenna,
-            token: null
+            contrasenna: hashedContrasenna
         });
 
         // Guardar el nuevo usuario en la BD
@@ -72,40 +74,37 @@ const generarToken = async (req, res) => {
     if (!esValida) {
         return res.status(401).json({ message: "Correo o contraseña incorrectos." });
     }
-        // Generar un token (en este caso, simplemente un hash del correo y contraseña)
-        const token = await bcrypt.hash(correo + contrasenna, 10);
+    // Crear el JWT
+    const token = jwt.sign(
+        {
+            id: usuarioEncontrado._id,
+            nombre: usuarioEncontrado.nombre,
+            correo: usuarioEncontrado.correo
+        },
+        SECRET_KEY,
+        {expiresIn: process.env.JWT_EXPIRES}
+    );
 
-        // Guardar el token en la base de datos
-        usuarioEncontrado.token = token;
-        await usuarioEncontrado.save();
-        return res.status(201).json({ token: usuarioEncontrado.token });
+        return res.status(200).json({ token });
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
 };
 
-const verificarToken = async (req, res, next) => {
-    // Obtener el token del encabezado de autorización
+const verificarToken = (req, res, next) => {
+
     const authHeader = req.headers['authorization'];
-    // El token se espera en el formato "Bearer <token>"
     const token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
         return res.status(401).json({ message: "Token no proporcionado." });
     }
-
     try {
-        const usuarioEncontrado = await usuario.findOne({ token });
-        if (!usuarioEncontrado) {
-            return res.status(401).json({ message: "Token inválido." });
-        }
-        // El token es válido, se puede acceder al usuario encontrado
-        req.usuario = usuarioEncontrado;
-        
-        // Continuar con la siguiente función de middleware o ruta
+        const tokenDescifrado = jwt.verify(token, SECRET_KEY);
+        req.usuario = tokenDescifrado;
         next();
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(401).json({ message: "Token inválido o expirado." });
     }
 };
 
