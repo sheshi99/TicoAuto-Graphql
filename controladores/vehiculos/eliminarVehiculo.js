@@ -1,4 +1,4 @@
-const Vehiculo = require('../../modelos/Vehiculo');
+const Vehiculo = require('../../modelos/vehiculo');
 
 const eliminarVehiculo = async (req, res) => {
     try {
