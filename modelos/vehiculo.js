@@ -34,6 +34,27 @@ const vehiculoSchema = new mongoose.Schema({
         default: 'disponible'
     },
 
+    combustible: {
+        type: String,
+        enum: ['Gasolina', 'Disel', 'Gas'],
+        required: true
+    },
+
+    color:{
+        type: String,
+        required: true
+    },
+
+    Transmisión: {
+        type: String,
+        enum: ['Manual', 'Automatico']
+    },
+
+    condición: {
+        type: String,
+        enum: ['Nuevo','Usado']
+    },
+
     usuario: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Usuario', 
