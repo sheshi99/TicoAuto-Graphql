@@ -40,6 +40,39 @@ const obtenerVehiculoPorId = async (req, res) => {
     }
 };
 
+
+
+const obtenerMisVehiculos = async (req, res) => {
+    try {
+
+        const vehiculos = await Vehiculo.find({
+            usuario: req.usuario.id
+        });
+
+        res.status(200).json(vehiculos);
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+const obtenerVehiculoEdicion = async (req, res) => {
+    try {
+        const vehiculo = await Vehiculo.findById(req.params.id);
+
+        if (!vehiculo) {
+            return res.status(404).json({ message: "Vehículo no encontrado" });
+        }
+
+        res.status(200).json(vehiculo);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+    
+
 module.exports = {
-    obtenerVehiculos, obtenerVehiculoPorId
+    obtenerVehiculos, obtenerVehiculoPorId, obtenerMisVehiculos, obtenerVehiculoEdicion
 };
