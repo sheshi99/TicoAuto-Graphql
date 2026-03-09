@@ -3,9 +3,11 @@ const router = express.Router();
 const path = require('path');
 const multer = require('multer');
 
-const { marcarVendido } = require("../controladores/vehiculos/marcarVendido");
-const { verificarToken } = require('../controladores/autenticacion');
-const {verificarTokenOpcional} = require ('../controladores/autenticacion');
+
+const { verificarToken, verificarTokenOpcional } 
+       = require('../controladores/autenticacion/verificarToken');
+
+
 const { crearVehiculo } = require('../controladores/vehiculos/crearVehiculo');
 const { editarVehiculo } = require('../controladores/vehiculos/editarVehiculo');
 const { obtenerVehiculos, obtenerVehiculoPorId,obtenerMisVehiculos,obtenerVehiculoEdicion} 
@@ -13,6 +15,7 @@ const { obtenerVehiculos, obtenerVehiculoPorId,obtenerMisVehiculos,obtenerVehicu
 
 const { eliminarVehiculo } = require('../controladores/vehiculos/eliminarVehiculo');
 const { filtroVehiculos } = require('../controladores/vehiculos/filtroVehiculos');
+const { marcarVendido } = require("../controladores/vehiculos/marcarVendido");
 
 
 
