@@ -38,7 +38,10 @@ const filtroVehiculos = async (req, res) => {
     }
 
     if (estado) {
-      filtro.estado = estado;
+      filtro.estado = {
+        $regex: estado,
+        $options: "i"
+      };
     }
 
     const pagina = parseInt(page);
