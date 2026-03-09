@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 const { verificarToken } = require('../controladores/autenticacion/verificarToken');
-const { crearRespuesta } = require('../controladores/respuestas/crearRespuesta');
+const { crearRespuesta } = require('../controladores/respuesta/crearRespuesta');
 
 
 
