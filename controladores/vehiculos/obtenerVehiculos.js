@@ -2,15 +2,6 @@ const usuario = require('../../modelos/usuario');
 const Vehiculo = require('../../modelos/vehiculo');
 
 
-const obtenerVehiculos = async (req, res) => {
-    try {
-        const vehiculos = await Vehiculo.find();
-        res.status(200).json(vehiculos);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-};
-
 const obtenerVehiculoPorId = async (req, res) => {
     try {
         const vehiculo = await Vehiculo.findById(req.params.id).populate('usuario');
@@ -74,5 +65,5 @@ const obtenerVehiculoEdicion = async (req, res) => {
     
 
 module.exports = {
-    obtenerVehiculos, obtenerVehiculoPorId, obtenerMisVehiculos, obtenerVehiculoEdicion
+    obtenerVehiculoPorId, obtenerMisVehiculos, obtenerVehiculoEdicion
 };
