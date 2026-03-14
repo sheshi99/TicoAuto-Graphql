@@ -10,13 +10,12 @@ const { verificarToken, verificarTokenOpcional }
 
 const { crearVehiculo } = require('../controladores/vehiculos/crearVehiculo');
 const { editarVehiculo } = require('../controladores/vehiculos/editarVehiculo');
-const { obtenerVehiculos, obtenerVehiculoPorId,obtenerMisVehiculos,obtenerVehiculoEdicion} 
+const {  obtenerVehiculoPorId,obtenerMisVehiculos,obtenerVehiculoEdicion} 
         = require('../controladores/vehiculos/obtenerVehiculos');
 
 const { eliminarVehiculo } = require('../controladores/vehiculos/eliminarVehiculo');
-const { filtroVehiculos } = require('../controladores/vehiculos/filtroVehiculos');
 const { marcarVendido } = require("../controladores/vehiculos/marcarVendido");
-
+const { filtroVehiculos } = require('../controladores/vehiculos/filtroVehiculos');
 
 
 // Configuración de Multer para manejar la subida de imágenes
@@ -34,12 +33,10 @@ router.post('/vehiculo', verificarToken, upload.single('imagen'), crearVehiculo)
 // Editar un vehículo existente
 router.put('/vehiculo/:id', verificarToken, upload.single('imagen'), editarVehiculo);
 
-// Obtener todos los vehículos
-router.get('/vehiculos', obtenerVehiculos);
-
 // Obtener un vehículo por ID
 router.get('/vehiculo/:id', verificarTokenOpcional, obtenerVehiculoPorId);
 
+// Gestion de mis vehículos
 router.get('/mis-vehiculos', verificarToken, obtenerMisVehiculos);
 
 // Obtener un vehículo para edición
