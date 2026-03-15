@@ -28,7 +28,7 @@ const obtenerPreguntasDeMisVehiculos = async (req, res) => {
                     select: "nombre"
                 }
             })
-            .sort({ createdAt: -1 });
+            .sort({ fechaPregunta: -1 });
 
         const resultado = [];
 
