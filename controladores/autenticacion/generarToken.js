@@ -36,7 +36,8 @@ const generarToken = async (req, res) => {
 
         return res.status(200).json({
             token,
-            nombre: usuarioEncontrado.nombre
+            nombre: usuarioEncontrado.nombre,
+            usuarioId: usuarioEncontrado._id
         });
 
     } catch (error) {
