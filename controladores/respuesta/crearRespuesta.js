@@ -7,12 +7,6 @@ const crearRespuesta = async (req, res) => {
         const { preguntaId } = req.params;
         const { respuesta } = req.body;
 
-        if (!req.usuario) {
-            return res.status(401).json({
-                message: "Usuario no autenticado"
-            });
-        }
-
         if (!respuesta || !respuesta.trim()) {
             return res.status(400).json({
                 message: "La respuesta es obligatoria"
@@ -57,11 +51,8 @@ const crearRespuesta = async (req, res) => {
 
         const respuestaCreada = await nuevaRespuesta.save();
 
-        return res.status(201).json({
-            message: "Respuesta creada",
-            respuesta: respuestaCreada
-        });
-
+        res.status(201).json(respuestaCreada);
+        
     } catch (error) {
         res.status(500).json({
             message: "Error al crear la respuesta"

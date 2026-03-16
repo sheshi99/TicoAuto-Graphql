@@ -6,11 +6,6 @@ const crearPregunta = async (req, res) => {
     const { vehiculoId } = req.params;
     const { pregunta } = req.body;
 
-    if (!req.usuario) {
-        return res.status(401).json({
-            mensaje: "Usuario no autenticado."
-        });
-    }
 
     if (!vehiculoId || !pregunta || !pregunta.trim()) {
         return res.status(400).json({
@@ -51,7 +46,7 @@ const crearPregunta = async (req, res) => {
             // Si encuentra una pregunta sin respuesta, bloquea
             if (!respuestaExistente) {
                 return res.status(400).json({
-                    mensaje: "No puedes enviar otra pregunta hasta que la anterior tenga respuesta."
+                    mensaje: "Debes esperar a que tu pregunta anterior sea respondida."
                 });
             }
         }
@@ -64,9 +59,7 @@ const crearPregunta = async (req, res) => {
 
         const preguntaGuardada = await nuevaPregunta.save();
 
-        return res.status(201).json({
-            pregunta: preguntaGuardada
-        });
+        res.status(201).json(preguntaGuardada);
 
     } catch (error) {
         return res.status(500).json({
