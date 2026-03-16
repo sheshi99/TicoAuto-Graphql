@@ -7,8 +7,18 @@ const SECRET_KEY = process.env.JWT_SECRET;
 const generarToken = async (req, res) => {
     const { correo, contrasenna } = req.body;
 
-    if (!correo || !contrasenna) {
-        return res.status(400).json({ message: "Correo y contraseña son requeridos." });
+     if (!correo || !correo.trim() || !contrasenna || !contrasenna.trim()) {
+        return res.status(400).json({
+            message: "Correo y contraseña son requeridos."
+        });
+    }
+
+    const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!regexCorreo.test(correo.trim())) {
+        return res.status(400).json({
+            message: "El formato del correo no es válido."
+        });
     }
 
     try {
