@@ -46,7 +46,7 @@ const crearPregunta = async (req, res) => {
             // Si encuentra una pregunta sin respuesta, bloquea
             if (!respuestaExistente) {
                 return res.status(400).json({
-                    mensaje: "No puedes enviar otra pregunta hasta que la anterior tenga respuesta."
+                    mensaje: "Debes esperar a que tu pregunta anterior sea respondida."
                 });
             }
         }
