@@ -82,7 +82,11 @@ const registrarUsuario = async (req, res) => {
 
         const usuarioGuardado = await nuevoUsuario.save();
 
-        return res.status(201).json(usuarioGuardado);
+        return res
+            .status(201)
+            .location(`/api/autenticacion/${usuarioGuardado._id}`)
+            .json(usuarioGuardado);
+            
     } catch (error) {
         return res.status(500).json({
             message: error.message

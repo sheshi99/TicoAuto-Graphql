@@ -78,7 +78,10 @@ const crearVehiculo = async (req, res) => {
 
         const vehiculoCreado = await vehiculo.save();
 
-        res.status(201).json(vehiculoCreado);
+        res
+            .status(201)
+            .location(`/api/vehiculos/${vehiculoCreado._id}`)
+            .json(vehiculoCreado);
 
     } catch (error) {
         console.error("ERROR CREAR VEHICULO:", error);

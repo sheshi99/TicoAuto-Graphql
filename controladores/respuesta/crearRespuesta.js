@@ -51,8 +51,11 @@ const crearRespuesta = async (req, res) => {
 
         const respuestaCreada = await nuevaRespuesta.save();
 
-        res.status(201).json(respuestaCreada);
-        
+        res
+            .status(201)
+            .location(`/api/respuestas/${respuestaCreada._id}`)
+            .json(respuestaCreada);
+
     } catch (error) {
         res.status(500).json({
             message: "Error al crear la respuesta"
