@@ -54,7 +54,7 @@ const crearRespuesta = async (req, res) => {
         res
             .status(201)
             .json(respuestaCreada)
-            .location(`/api/vehiculos/${respuestaCreada._id}`)
+            .location(`/api/respuestas/${respuestaCreada._id}`)
         
     } catch (error) {
         res.status(500).json({
