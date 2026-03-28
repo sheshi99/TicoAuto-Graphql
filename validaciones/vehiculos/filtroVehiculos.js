@@ -1,5 +1,3 @@
-// validaciones/vehiculo/validarFiltroVehiculos.js
-
 function validarPaginacion(page, limit) {
     const pagina = parseInt(page);
     const limite = parseInt(limit);
