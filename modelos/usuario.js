@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const usuarioSchema = new mongoose.Schema({
 
+
+    cedula: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    
     nombre: {
         type: String,
         required: true
