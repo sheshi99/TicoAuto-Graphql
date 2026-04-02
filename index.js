@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
+
 //Conexión a la BD
 mongoose.connect(process.env.MONGO_URI);
 const database = mongoose.connection;
@@ -27,6 +28,7 @@ app.use(cors({
     origin: '*',
     methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH']
 }));
+
 
 //Ruta para acceder a las imágenes
 app.use('/imagenes', express.static('imagenes'));

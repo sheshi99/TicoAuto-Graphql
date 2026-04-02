@@ -1,6 +1,9 @@
 const usuario = require('../../modelos/usuario');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 const { consultarCedula } = require('../../servicios/padronServicio');
+
+const enviarCorreoVerificacion = require('../../utilidades/enviarCorreo');
 
 const validarContrasenna = (contrasenna) => {
     const tieneMin = /[a-z]/.test(contrasenna);
@@ -61,6 +64,7 @@ const registrarUsuario = async (req, res) => {
             });
         }
 
+        // Verificar que la cédula exista en el padrón
         const persona = await consultarCedula(cedula.trim());
 
         if (!persona) {
@@ -69,6 +73,7 @@ const registrarUsuario = async (req, res) => {
             });
         }
 
+        // Verificar que el correo y la cédula no estén ya registrados
         const usuarioExistenteCorreo = await usuario.findOne({ 
             correo: correo.trim().toLowerCase() 
         });
@@ -89,7 +94,12 @@ const registrarUsuario = async (req, res) => {
             });
         }
 
+        // Encriptar la contraseña
         const hashedContrasenna = await bcrypt.hash(contrasenna.trim(), 10);
+        
+        // Generar token de verificación
+        const rawToken = crypto.randomBytes(32).toString('hex');
+        const hashedToken = crypto.createHash('sha256').update(rawToken).digest('hex');
 
         const nuevoUsuario = new usuario({
             cedula: cedula.trim(),
@@ -98,10 +108,22 @@ const registrarUsuario = async (req, res) => {
             segundoApellido: persona.apellidoMaterno,
             telefono: telefono.trim(),
             correo: correo.trim().toLowerCase(),
-            contrasenna: hashedContrasenna
+            contrasenna: hashedContrasenna,
+            estado: 'pendiente',
+            tokenVerificacion: hashedToken
         });
 
         const usuarioGuardado = await nuevoUsuario.save();
+
+
+        // Enviar correo de verificación
+        const linkVerificacion = `http://localhost:5500/html/usuario/verificacion.html?token=${encodeURIComponent(rawToken)}`;
+
+        await enviarCorreoVerificacion(
+            usuarioGuardado.correo,
+            usuarioGuardado.nombre,
+            linkVerificacion
+        );
 
         return res
             .status(201)

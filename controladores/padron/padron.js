@@ -1,4 +1,4 @@
-const { consultarCedula } = require('../servicios/padronServicio');
+const { consultarCedula } = require('../../servicios/padronServicio');
 
 const obtenerDatosCedula = async (req, res) => {
     const { cedula } = req.params;
