@@ -40,6 +40,16 @@ const usuarioSchema = new mongoose.Schema({
         required: true
     },
 
+    estado: {
+        type: String,
+        enum: ['pendiente', 'activo'],
+        default: 'pendiente'
+    },
+    tokenVerificacion: {
+        type: String,
+        default: null
+    }
+
 }, 
 
 { timestamps: true });
