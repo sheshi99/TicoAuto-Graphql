@@ -33,7 +33,7 @@ const loginGoogle = async (req, res) => {
                 proveedor: usuarioEncontrado.proveedor
             },
             process.env.JWT_SECRET,
-            process.env.JWT_EXPIRES
+            { expiresIn: process.env.JWT_EXPIRES }
         );
 
         return res.status(200).json({
