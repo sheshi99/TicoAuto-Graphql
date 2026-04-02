@@ -5,12 +5,14 @@ const verificarCorreo = async (req, res) => {
     try {
         const { token } = req.query;
 
+        // Validar que el token exista
         if (!token) {
             return res.status(400).json({
                 message: "Token requerido."
             });
         }
 
+        // Hash del token para comparar con la BD
         const hashedToken = crypto
             .createHash('sha256')
             .update(token.trim())
@@ -26,12 +28,14 @@ const verificarCorreo = async (req, res) => {
             });
         }
 
+        // Verificar si el usuario ya está activo
         if (usuarioEncontrado.estado === 'activo') {
             return res.status(200).json({
                 message: "El usuario ya está verificado."
             });
         }
 
+        // Activar el usuario
         usuarioEncontrado.estado = 'activo';
         usuarioEncontrado.tokenVerificacion = null;
 
