@@ -28,6 +28,12 @@ const generarToken = async (req, res) => {
             return res.status(401).json({ message: "Correo o contraseña incorrectos." });
         }
 
+        if (usuarioEncontrado.estado !== 'activo') {
+            return res.status(403).json({
+                message: "Cuenta no verificada. Revisa tu correo para activarla."
+            });
+        }
+
         const esValida = await bcrypt.compare(contrasenna, usuarioEncontrado.contrasenna);
 
         if (!esValida) {
