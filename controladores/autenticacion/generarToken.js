@@ -57,15 +57,22 @@ const generarToken = async (req, res) => {
             });
         }
 
-        const token = jwt.sign(
-            {
-                id: usuarioEncontrado._id,
-                nombre: usuarioEncontrado.nombre,
-                correo: usuarioEncontrado.correo
-            },
-            SECRET_KEY,
-            { expiresIn: process.env.JWT_EXPIRES }
-        );
+        if (!usuarioEncontrado.telefono) {
+            return res.status(400).json({
+                message: "El usuario no tiene un número telefónico registrado."
+            });
+        }
+
+        const codigo = generarCodigo2FA();
+        const fechaExpiracion = new Date(Date.now() + 1 * 60 * 1000);
+
+        usuarioEncontrado.codigo2FA = codigo;
+        usuarioEncontrado.codigo2FAExpira = fechaExpiracion;
+        usuarioEncontrado.loginPendiente = true;
+
+        await usuarioEncontrado.save();
+
+        await enviarCodigoSMS(usuarioEncontrado.telefono, codigo);
 
         return res.status(200).json({
             requiere2FA: true,
