@@ -7,7 +7,7 @@ const usuarioSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    
+
     nombre: {
         type: String,
         required: true
@@ -15,7 +15,7 @@ const usuarioSchema = new mongoose.Schema({
 
     primerApellido: {
         type: String,
-        required: true  
+        required: true
     },
 
     segundoApellido: {
@@ -61,6 +61,19 @@ const usuarioSchema = new mongoose.Schema({
     tokenVerificacion: {
         type: String,
         default: null
+    },
+
+    codigo2FA: {
+        type: String,
+        default: null
+    },
+    codigo2FAExpira: {
+        type: Date,
+        default: null
+    },
+    loginPendiente: {
+        type: Boolean,
+        default: false
     }
 
 }, { timestamps: true });
