@@ -40,7 +40,6 @@ app.use('/api', require('./rutas/pregunta'));
 app.use('/api', require('./rutas/respuestas'));
 app.use('/api', require('./rutas/conversacion'));
 app.use('/api', require('./rutas/padron'));
-app.use('/api', require('./rutas/autenticacionGoogle'));
 
 //Inicialización del servidor
 app.listen(process.env.PORT, () => {

@@ -1,6 +1,6 @@
 const usuario = require('../../modelos/usuario');
 const jwt = require('jsonwebtoken');
-const { verificarGoogleToken } = require('../../utilidades/verificarGoogle');
+const { verificarGoogleToken } = require('../../servicios/googleServicio');
 
 const loginGoogle = async (req, res) => {
     const { credential } = req.body;
@@ -22,6 +22,12 @@ const loginGoogle = async (req, res) => {
         if (!usuarioEncontrado) {
             return res.status(404).json({
                 message: "Usuario no registrado con Google"
+            });
+        }
+
+        if (usuarioEncontrado.estado !== 'activo') {
+            return res.status(403).json({
+                message: "Cuenta no verificada. Revisa tu correo para activarla."
             });
         }
 
