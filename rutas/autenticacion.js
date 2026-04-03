@@ -6,6 +6,7 @@ const router = express.Router();
 const {registrarUsuario } = require('../controladores/autenticacion/registrarUsuario');
 const {generarToken} = require('../controladores/autenticacion/generarToken');
 const {verificarCorreo} = require('../controladores/autenticacion/verificarCorreo');
+const {verificarCodigo2FA} = require('../controladores/autenticacion/verificarCodigo2FA');
   
 
 // Autenticación con Google
@@ -26,5 +27,7 @@ router.get('/autenticacion/verificacion', verificarCorreo);
 router.post('/autenticacion/google', registrarUsuarioGoogle);
 router.post('/autenticacion/google/login', loginGoogle);
 
+// Verificación del código 2FA → aquí sí devuelve el JWT final
+router.post('/autenticacion/codigo2FA', verificarCodigo2FA);
 
 module.exports = router;
