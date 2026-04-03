@@ -1,6 +1,6 @@
 const usuario = require('../../modelos/usuario');
 const jwt = require('jsonwebtoken');
-const { verificarGoogleToken } = require('../../utilidades/verificarGoogle');
+const { verificarGoogleToken } = require('../../servicios/googleServicio');
 
 const loginGoogle = async (req, res) => {
     const { credential } = req.body;
