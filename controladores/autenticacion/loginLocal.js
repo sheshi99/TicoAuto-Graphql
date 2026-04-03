@@ -6,7 +6,7 @@ const generarCodigo2FA = () => {
     return Math.floor(100000 + Math.random() * 900000).toString();
 };
 
-const generarToken = async (req, res) => {
+const loginLocal = async (req, res) => {
     const { correo, contrasenna } = req.body;
 
     if (!correo || !correo.trim() || !contrasenna || !contrasenna.trim()) {
@@ -95,5 +95,5 @@ const generarToken = async (req, res) => {
 };
 
 module.exports = {
-    generarToken
+    loginLocal
 };

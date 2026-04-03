@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Autenticación local
 const {registrarUsuario } = require('../controladores/autenticacion/registrarUsuario');
-const {generarToken} = require('../controladores/autenticacion/generarToken');
+const {loginLocal} = require('../controladores/autenticacion/loginLocal');
 const {verificarCorreo} = require('../controladores/autenticacion/verificarCorreo');
 const {verificarCodigo2FA} = require('../controladores/autenticacion/verificarCodigo2FA');
   
@@ -16,7 +16,7 @@ const { loginGoogle } = require('../controladores/autenticacion/loginGoogle');
 
 // Rutas de atenticación local
 router.post('/autenticacion', registrarUsuario);
-router.post('/autenticacion/login', generarToken);
+router.post('/autenticacion/login', loginLocal);
 
 
 // Verificación de correo
