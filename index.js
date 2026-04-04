@@ -4,18 +4,13 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@as-integrations/express5');
 
-//Conexión a la BD
-mongoose.connect(process.env.MONGO_URI);
-const database = mongoose.connection;
+const esquema = require('./graphql/esquema');
+const resolvers = require('./graphql/resolvers');
+const context = require('./graphql/contexto');
 
-database.on('error', (error) => {
-    console.log(error);
-});
-
-database.once('connected', () => {
-    console.log('Conexión a la BD exitosa');
-});
 
 
 //Creación del servidor
@@ -41,7 +36,38 @@ app.use('/api', require('./rutas/respuestas'));
 app.use('/api', require('./rutas/conversacion'));
 app.use('/api', require('./rutas/padron'));
 
-//Inicialización del servidor
-app.listen(process.env.PORT, () => {
-    console.log(`Servidor corriendo en puerto ${process.env.PORT}`);
-});
+
+async function iniciarServidor() {
+    try {
+        // Conexión a la BD
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log('Conexión a la BD exitosa');
+
+        // Servidor Apollo GraphQL
+        const apolloServer = new ApolloServer({
+            esquema,
+            resolvers
+        });
+
+        await apolloServer.start();
+
+        app.use(
+            '/graphql',
+            express.json(),
+            expressMiddleware(apolloServer, {
+                context: async ({ req }) => context({ req })
+            })
+        );
+
+        // Inicialización del servidor
+        app.listen(process.env.PORT, () => {
+            console.log(`Servidor corriendo en puerto ${process.env.PORT}`);
+            console.log(`GraphQL disponible en http://localhost:${process.env.PORT}/graphql`);
+        });
+
+    } catch (error) {
+        console.error('Error al iniciar el servidor:', error);
+    }
+}
+
+iniciarServidor();
