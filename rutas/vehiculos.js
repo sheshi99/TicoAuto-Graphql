@@ -14,7 +14,6 @@ const {  obtenerVehiculoPorId,obtenerMisVehiculos,obtenerVehiculoEdicion}
 
 const { eliminarVehiculo } = require('../controladores/vehiculos/eliminarVehiculo');
 const { marcarVendido } = require("../controladores/vehiculos/marcarVendido");
-const { filtroVehiculos } = require('../controladores/vehiculos/filtroVehiculos');
 
 
 // Configuración de Multer para manejar la subida de imágenes
@@ -47,7 +46,5 @@ router.delete('/vehiculo/:id', verificarToken, eliminarVehiculo);
 // Cambiar estado del vehículo a vendido
 router.patch('/vehiculo/vendido/:id', verificarToken, marcarVendido);
 
-// Filtro de vehículos 
-router.get('/vehiculos/filtro', filtroVehiculos);
 
 module.exports = router;
