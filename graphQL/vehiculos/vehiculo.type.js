@@ -4,7 +4,8 @@ const vehiculoTypeDefs = gql`
   type Usuario {
     _id: ID
     nombre: String
-    lastName: String
+    primerApellido: String
+    segundoApellido: String
     correo: String
     telefono: String
   }
@@ -15,8 +16,12 @@ const vehiculoTypeDefs = gql`
     modelo: String!
     anno: Int!
     precio: Float!
-    estado: String!
     imagen: String!
+    estado: String!
+    combustible: String!
+    color: String!
+    transmision: String!
+    condicion: String!
     usuario: Usuario
   }
 
