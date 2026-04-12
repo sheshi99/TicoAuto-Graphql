@@ -9,6 +9,7 @@ const vehiculoResolvers = {
 
                 if (validacion.error) {
                     throw new Error(validacion.error);
+
                 }
 
                 const {
@@ -82,10 +83,12 @@ const vehiculoResolvers = {
                 };
 
             } catch (error) {
-                throw new Error(error.message || 'Error en filtroVehiculos');
+                console.error(error);
+                throw new Error('Ha ocurrido un error al procesar la búsqueda de vehículos');
             }
         },
 
+        // Mostrar el detalle del vehículo (público y privado)
         obtenerVehiculoPorId: async (_, { id }, contexto) => {
             try {
                 const vehiculo = await Vehiculo.findById(id).populate('usuario');
@@ -110,10 +113,13 @@ const vehiculoResolvers = {
                 };
 
             } catch (error) {
-                throw new Error(error.message || 'Error al obtener vehículo');
+                console.error(error);
+                throw new Error('Ha ocurrido un error al obtener la información del vehículo'); 
             }
         },
 
+
+        // Mostrar la gestión de mis vehículos (solo para el usuario logueado)
         obtenerMisVehiculos: async (_, __, contexto) => {
             try {
                 if (!contexto.usuario || !contexto.usuario.id) {
@@ -128,10 +134,14 @@ const vehiculoResolvers = {
                 return vehiculos;
 
             } catch (error) {
-                throw new Error(error.message || 'Error al obtener mis vehículos');
+
+                console.error(error);
+                throw new Error('Ha ocurrido un error al obtener sus vehículos'); 
             }
         },
 
+
+        // Obtener la información del vehículo propio para edición
         obtenerVehiculoEdicion: async (_, { id }, contexto) => {
             try {
                 if (!contexto.usuario || !contexto.usuario.id) {
@@ -151,7 +161,8 @@ const vehiculoResolvers = {
                 return vehiculo;
 
             } catch (error) {
-                throw new Error(error.message || 'Error al obtener vehículo para edición');
+                console.error(error);
+                throw new Error('Ha ocurrido un error al procesar la solicitud');
             }
         }
     }
