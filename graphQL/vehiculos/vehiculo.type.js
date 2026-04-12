@@ -44,8 +44,10 @@ const vehiculoTypeDefs = gql`
       limit: Int!
     ): VehiculosPaginados!
 
-    obtenerVehiculoPorId(id: ID!): Vehiculo
-    obtenerMisVehiculos: [Vehiculo!]!
+    obtenerVehiculoPorId(id: ID!): Vehiculo 
+
+    obtenerMisVehiculos: [Vehiculo!]! # Devuelve una lista de vehículos
+
     obtenerVehiculoEdicion(id: ID!): Vehiculo
   }
 `;
