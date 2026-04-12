@@ -9,7 +9,7 @@ const { expressMiddleware } = require('@as-integrations/express5');
 
 const typeDefs = require('./graphql/esquema');
 const resolvers = require('./graphql/resolvers');
-const context = require('./graphql/contexto');
+const contexto = require('./graphql/contexto');
 
 
 
@@ -55,7 +55,7 @@ async function iniciarServidor() {
             '/graphql',
             express.json(),
             expressMiddleware(apolloServer, {
-                context: async ({ req }) => context({ req })
+                context: async ({ req }) => contexto({ req })
             })
         );
 
