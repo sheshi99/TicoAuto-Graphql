@@ -9,7 +9,7 @@ const { verificarToken, verificarTokenOpcional }
 
 const { crearVehiculo } = require('../controladores/vehiculos/crearVehiculo');
 const { editarVehiculo } = require('../controladores/vehiculos/editarVehiculo');
-const {  obtenerVehiculoPorId,obtenerMisVehiculos,obtenerVehiculoEdicion} 
+const { obtenerMisVehiculos,obtenerVehiculoEdicion} 
         = require('../controladores/vehiculos/obtenerVehiculos');
 
 const { eliminarVehiculo } = require('../controladores/vehiculos/eliminarVehiculo');
@@ -30,9 +30,6 @@ router.post('/vehiculo', verificarToken, upload.single('imagen'), crearVehiculo)
 
 // Editar un vehículo existente
 router.put('/vehiculo/:id', verificarToken, upload.single('imagen'), editarVehiculo);
-
-// Obtener un vehículo por ID
-router.get('/vehiculo/:id', verificarTokenOpcional, obtenerVehiculoPorId);
 
 // Gestion de mis vehículos
 router.get('/mis-vehiculos', verificarToken, obtenerMisVehiculos);
