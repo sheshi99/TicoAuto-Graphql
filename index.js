@@ -4,8 +4,12 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
+// Servidor GraphQL
 const { ApolloServer } = require('@apollo/server');
+
+// Integración de Apollo Server con Express
 const { expressMiddleware } = require('@as-integrations/express5');
+
 
 const typeDefs = require('./graphql/esquema');
 const resolvers = require('./graphql/resolvers');
