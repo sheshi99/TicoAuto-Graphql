@@ -129,7 +129,7 @@ const vehiculoResolvers = {
         // Mostrar la gestión de mis vehículos (solo usario logueado).
         obtenerMisVehiculos: async (_, __, contexto) => {
             try {
-                if (!contexto.usuario || !contexto.usuario.id) {
+                if (!contexto.usuario) {
                     throw new Error('Usuario no autenticado');
                 }
 
@@ -149,7 +149,7 @@ const vehiculoResolvers = {
         // Obtener información de un vehículo propio para edición.
         obtenerVehiculoEdicion: async (_, { id }, contexto) => {
             try {
-                if (!contexto.usuario || !contexto.usuario.id) {
+                if (!contexto.usuario) {
                     throw new Error('Usuario no autenticado');
                 }
 
