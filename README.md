@@ -51,6 +51,7 @@ El sistema utiliza una Arquitectura Orientada a Servicios (SOA) con un backend R
 
 ## Diagrama arquitectura de servicios
 
+![Diagrama de Arquitectura de Servicios](diagrama/Diagrama%20de%20servicios.png)
 
 ---
 
