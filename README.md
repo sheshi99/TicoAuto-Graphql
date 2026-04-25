@@ -56,8 +56,6 @@ El sistema utiliza una Arquitectura Orientada a Servicios (SOA) con un backend R
 
 ## Instalación
 
-## Instalación
-
 ### 1. Clonar el repositorio
 
 Primero, debes clonar el repositorio:
@@ -69,13 +67,17 @@ cd TicoAuto-Backend-Final
 
 Segundo, debes instalar todas las dependencias:
 
-**npm install express mongoose dotenv jwt-simple bcryptjs cors sendgrid @sendgrid/mail google-auth-library twilio apollo-server-express graphql**
+```bash
+npm install express mongoose dotenv jwt-simple bcryptjs cors sendgrid @sendgrid/mail google-auth-library twilio apollo-server-express graphql
+```
 
 Luego, Tienes que crear un archivo .env, donde van todas tus variables de entorno.
 
-**Ejemplo:**
+### Ejemplo:
 
-**PORT=5000**
-**MONGO_URI=mongodb://localhost:27001/auto**
-**JWT_SECRET=your_jwt_secret_key**
+```bash
+PORT=5000
+MONGO_URI=mongodb://localhost:27001/auto
+JWT_SECRET=your_jwt_secret_key
+```
 
