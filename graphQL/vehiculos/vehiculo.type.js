@@ -3,7 +3,7 @@ const gql = String.raw; // Utiliza String.raw para definir el esquema GraphQL co
 // Importa el modelo de Vehiculo para realizar consultas a la base de datos
 const vehiculoTypeDefs = gql`
 
-  // Define el tipo Usuario con sus campos
+  #Define el tipo Usuario con sus campos
   type Usuario {
     id: ID!
     nombre: String!
@@ -13,7 +13,7 @@ const vehiculoTypeDefs = gql`
     telefono: String
   }
 
-  //Define el tipo Vehiculo con sus campos y la relación con el tipo Usuario
+  #Define el tipo Vehiculo con sus campos y la relación con el tipo Usuario
   type Vehiculo {
     id: ID!
     marca: String!
@@ -29,14 +29,14 @@ const vehiculoTypeDefs = gql`
     usuario: Usuario
   }
 
-  // Define el tipo Vehiculos Paginados para manejar la paginacion
+  #Define el tipo Vehiculos Paginados para manejar la paginacion
   type VehiculosPaginados {
     vehiculos: [Vehiculo!]!
     paginaActual: Int!
     totalPaginas: Int!
   }
 
-  // Define las consultas
+  #Define las consultas
   extend type Query {
     filtroVehiculos(
       marca: String
