@@ -51,10 +51,9 @@ El sistema utiliza una Arquitectura Orientada a Servicios (SOA) con un backend R
 
 ## Diagrama arquitectura de servicios
 
+![Diagrama de Arquitectura de Servicios](diagrama/Diagrama%20de%20servicios.png)
 
 ---
-
-## Instalación
 
 ## Instalación
 
@@ -64,18 +63,26 @@ Primero, debes clonar el repositorio:
 
 ```bash
 git clone https://github.com/walbyn504/TicoAuto-Backend-Final
-cd TicoAuto-Backend-Final
 ```
 
-Segundo, debes instalar todas las dependencias:
+Segundo, debes inicializar node.js:
 
-**npm install express mongoose dotenv jwt-simple bcryptjs cors sendgrid @sendgrid/mail google-auth-library twilio apollo-server-express graphql**
+```bash
+npm install 
+```
 
 Luego, Tienes que crear un archivo .env, donde van todas tus variables de entorno.
 
-**Ejemplo:**
+### Ejemplo:
 
-**PORT=5000**
-**MONGO_URI=mongodb://localhost:27001/auto**
-**JWT_SECRET=your_jwt_secret_key**
+```bash
+PORT=5000
+MONGO_URI=mongodb://localhost:27001/auto
+JWT_SECRET=your_jwt_secret_key
+SENDGRID_API_KEY=your_sendgrid_api_key
+TWILIO_ACCOUNT_SID=your_twilio_account_sid
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+```
 
