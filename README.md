@@ -1,53 +1,54 @@
-# TicoAuto-Backend
+# TicoAuto-Backend GraphQL
 
 ## Descripción
 
-Este proyecto corresponde al backend de **TicoAuto**, una plataforma para la publicación y búsqueda de vehículos en venta. Los usuarios pueden registrarse, iniciar sesión, publicar vehículos, realizar búsquedas con filtros, y comunicarse mediante preguntas y respuestas asociadas a cada vehículo.
+Este proyecto corresponde al backend **GraphQL** de TicoAuto, una plataforma para la publicación y búsqueda de vehículos en venta.
 
-El sistema utiliza una Arquitectura Orientada a Servicios (SOA) con un backend REST y un frontend desacoplado. La autenticación y las validaciones de seguridad son gestionadas a través de JWT y 2FA.
+Este repositorio fue separado del backend REST con el objetivo de mantener GraphQL de forma independiente. Permite consultar información de vehículos mediante un único endpoint GraphQL, reutilizando los modelos de MongoDB.
 
 ---
 
 ## Tecnologías utilizadas
 
-- **Node.js**: JavaScript runtime environment para backend.
-- **Express.js**: Framework web para Node.js.
-- **MongoDB**: Base de datos NoSQL para almacenamiento.
+- **Node.js**: Entorno de ejecución para backend.
+- **Express.js**: Framework utilizado para levantar el servidor.
+- **Apollo Server**: Servidor GraphQL.
+- **GraphQL**: Lenguaje de consulta para obtener datos específicos.
+- **MongoDB**: Base de datos NoSQL.
 - **Mongoose**: ORM para MongoDB.
-- **JWT (JSON Web Token)**: Para la autenticación de usuarios.
-- **bcrypt**: Para la encriptación de contraseñas.
+- **JWT**: Para validar usuarios autenticados.
 - **dotenv**: Para manejar variables de entorno.
-- **cors**: Middleware para habilitar solicitudes de origen cruzado.
-- **SendGrid**: Para la verificación por correo electrónico.
-- **Google OAuth2**: Para autenticación mediante Google.
-- **Twilio**: Para el envío de mensajes SMS para 2FA.
-- **GraphQL**: Para consultas eficientes al backend.
+- **cors**: Middleware para permitir solicitudes entre frontend y backend.
 
 ---
 
 ## Funcionalidades principales
 
-- **Registro de usuarios**:
-  - Validación de cédula (verificación con un API externo).
-  - Envío de correo de verificación con enlace único.
-  - Autenticación mediante Google OAuth2.
+- **Consulta de vehículos**:
+  - Obtener vehículos registrados.
+  - Buscar vehículos por filtros.
+  - Consultar vehículos por ID.
 
-- **Autenticación**:
-  - Login mediante correo electrónico y 2FA con número de teléfono.
-  - Integración con Google para login y registro.
+- **Chat (Preguntas y Respuestas)**:
+  - Obtener las preguntas realizadas a los vehículos.
+  - Obtener las respuestas asociadas a cada pregunta.
 
-- **Gestión de vehículos**:
-  - Crear, leer, actualizar y eliminar vehículos.
-  - Marcar vehículos como vendidos.
-  
 - **Filtros de búsqueda**:
-  - Búsqueda por marca, modelo, precio, año, y estado del vehículo.
+  - Filtrado por marca, modelo, precio, año y estado.
 
-- **Sistema de preguntas y respuestas**:
-  - Los usuarios pueden realizar preguntas sobre los vehículos y recibir respuestas.
+- **Autenticación en GraphQL**:
+  - Validación del token JWT enviado desde el frontend.
+  - Uso de contexto para identificar al usuario autenticado.
 
-- **Consultas GraphQL**:
-  - Servicio GraphQL que permite realizar consultas sobre los vehículos y otros datos.
+---
+
+## Endpoint principal
+
+```txt
+/graphql
+```
+
+---
 
 ## Diagrama arquitectura de servicios
 
@@ -62,7 +63,7 @@ El sistema utiliza una Arquitectura Orientada a Servicios (SOA) con un backend R
 Primero, debes clonar el repositorio:
 
 ```bash
-git clone https://github.com/walbyn504/TicoAuto-Backend-Final
+git clone https://github.com/sheshi99/TicoAuto-Graphql
 ```
 
 Segundo, debes inicializar node.js:
@@ -76,13 +77,8 @@ Luego, Tienes que crear un archivo .env, donde van todas tus variables de entorn
 ### Ejemplo:
 
 ```bash
-PORT=5000
+PORT=4000
 MONGO_URI=mongodb://localhost:27001/auto
 JWT_SECRET=your_jwt_secret_key
-SENDGRID_API_KEY=your_sendgrid_api_key
-TWILIO_ACCOUNT_SID=your_twilio_account_sid
-TWILIO_AUTH_TOKEN=your_twilio_auth_token
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
 ```
 
